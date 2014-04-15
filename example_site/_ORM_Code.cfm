@@ -2,8 +2,6 @@
 	Note that the queries below are based on the datasource been set in the Application.cfc file
 --->
 
-<!---
-
 <!--- Get table names --->
 <cfquery name="qry_tableNames">
 	select name
@@ -52,6 +50,5 @@
 
 	<br /><br /><br />
 </cfloop>
---->
 
 <h1>All Done</h1>
