@@ -1,4 +1,3 @@
-
 <!---
 	Note that the queries below are based on the datasource been set in the Application.cfc file
 --->
@@ -40,11 +39,7 @@
 			&lt;cfcomponent persistent="true"&gt;
 				<br />
 				<cfloop query="qry_tableColumns">
-					&lt;cfproperty name="#qry_tableColumns.column_name#"
-					<cfif first>
-						fieldtype="id" generator="native"
-						<cfset first = false>
-					</cfif>&gt;
+					&lt;cfproperty name="#qry_tableColumns.column_name#"<cfif first> fieldtype="id" generator="native"<cfset first = false></cfif>&gt;
 
 					<br />
 				</cfloop>
