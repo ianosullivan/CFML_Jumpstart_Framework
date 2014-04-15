@@ -1,4 +1,4 @@
-General Info
+##General Info
 
 System uses <base href=”#request.webRoot#”> tag so all sources for images, css and scripts are relative to the base path URL. This is very important as all AJAX calls are relevant to the base tag. Using the dynamic base tag means you don’t need to worry about paths when releasing code. This makes use of Ben Nadels dynamic URL code.
 
@@ -16,12 +16,12 @@ Functioning Login & Logout buttons
 
 Uses bootstrap 3.0 and FontAwesome 4.0.1, Responsive Design.
 
-IMPORTANT:: Any changes to CFCs or ORM requires a reload. Do this by passing ‘?AppReload=loco’ into the URL. Note: System also supports key/value URL pairs e.g. index.cfm/AppReload/loco
+*IMPORTANT*:: Any changes to CFCs or ORM requires a reload. Do this by passing ‘?AppReload=loco’ into the URL. Note: System also supports key/value URL pairs e.g. index.cfm/AppReload/loco
 
 
 
 
-Javascript stuff
+##Javascript stuff
 
 Has the Alert(‘add your HTML here’) function which is useful to unobtrusively notify users of soemthing - Works well with font awesome e.g. Alert('<i class="fa fa-thumbs-up"></i> dark thumbs up!!');
 
@@ -36,7 +36,7 @@ Has getURLParameter(variable_name) function to pull URL vars into JS.
 
 
 
-Database Info
+##Database Info
 
 Uses data source ‘_Template_DB’.
 
