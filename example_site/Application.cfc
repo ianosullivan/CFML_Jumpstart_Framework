@@ -245,8 +245,9 @@
 		<!--- Display an error message if there is a page context. --->
 		<cfif NOT (Arguments.EventName IS "onSessionEnd") OR (Arguments.EventName IS "onApplicationEnd")>
 
-			<!--- Only output the GUI as long as the layout is NOT supressed. --->
-			<cfif NOT IsDefined("nolayout")>
+			<!--- Only output the GUI as long as the layout is NOT supressed. Output errors for the '_test.cfm' page'--->
+			<cfif !IsDefined("nolayout") OR ListContains('_test.cfm', GetFileFromPath(CGI.CF_TEMPLATE_PATH))>
+
 				<cfoutput>
 					<div class="alert alert-danger alert-dismissable">
 					  <!--<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>-->
