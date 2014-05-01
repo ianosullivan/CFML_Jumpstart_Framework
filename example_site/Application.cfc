@@ -235,19 +235,24 @@
 		--->
 	</cffunction>
 
+
 	<cffunction name="onError">
 		<cfargument name="Exception" required=true/>
 		<cfargument type="String" name="EventName" required=true/>
 
-        <!--- Initialize the error component
+        	<!--- Initialize the error component
 		<cfset application.cfcs.error = new application.coms.error()>--->
 
 		<!--- Display an error message if there is a page context. --->
 		<cfif NOT (Arguments.EventName IS "onSessionEnd") OR (Arguments.EventName IS "onApplicationEnd")>
 
-			<!--- Only output the GUI as long as the layout is NOT supressed. Output errors for the '_test.cfm' page'--->
-			<cfif !IsDefined("nolayout") OR ListContains('_test.cfm', GetFileFromPath(CGI.CF_TEMPLATE_PATH))>
+			<cfset test_page = false>
+			<cfif ListContains('_test.cfm', GetFileFromPath(CGI.CF_TEMPLATE_PATH))>
+				<cfset test_page = true>
+			</cfif>
 
+			<!--- Only output the GUI as long as the layout is NOT supressed. Output errors for the '_test.cfm' page'--->
+			<cfif !IsDefined("nolayout") OR test_page>
 				<cfoutput>
 					<div class="alert alert-danger alert-dismissable">
 					  <!--<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>-->
@@ -258,7 +263,7 @@
 					</div>
 
 					<!--- Shown on click of 'technical team' above --->
-					<div id="error_info" style="display:none">
+					<div id="error_info" <cfif !test_page>style="display:none"</cfif> >
 					    <h4>Error dump...</h4>
 					    <cfdump var=#Arguments.Exception#>
 
