@@ -10,28 +10,30 @@
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width">
 
-	<!--- !!!!!! VERY IMPORTANT !!!!!! 
+	<!--- !!!!!! <base> tag is VERY IMPORTANT !!!!!! 
 		This ensures images, hrefs and script sources use a FQDN to the file location throughout the site.
-		This ensures that any subfolders have the correct locations
+		This ensures that any subfolders have the correct locations to assets
 	--->
-	<cfoutput><base href="#request.site_URL#"/></cfoutput>
+	<cfoutput>
+	<base href="#request.site_URL#"/>
 		
-	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/bootstrap.min.css?#application.version#">
 	<style>
 		body {
 			padding-top: 50px;
 			padding-bottom: 20px;
 		}
 	</style>
-	<link rel="stylesheet" href="css/bootstrap-theme.min.css">
-	<link rel="stylesheet" href="css/main.css">
-	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.min.css">
+	<link rel="stylesheet" href="css/bootstrap-theme.min.css?#application.version#">
+	<link rel="stylesheet" href="css/main.css?#application.version#">
+	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.min.css?#application.version#">
 	
-	<script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+	<script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js?#application.version#"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js?#application.version#"></script>
 	<script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.1.min.js"><\/script>')</script>
-	<script src="js/vendor/bootstrap.min.js"></script>
-	<script src="js/main.js"></script>
+	<script src="js/vendor/bootstrap.min.js?#application.version#"></script>
+	<script src="js/main.js?#application.version#"></script>
+	</cfoutput>
 </head>
 
 <body>
