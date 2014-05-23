@@ -33,6 +33,9 @@
 	<script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.1.min.js"><\/script>')</script>
 	<script src="js/vendor/bootstrap.min.js?#application.version#"></script>
 	<script src="js/main.js?#application.version#"></script>
+	<!--- Application wide version variable that uses the config variable --->
+	<script>var app_version = '#application.version#'</script>
+
 	</cfoutput>
 </head>
 
