@@ -1,5 +1,5 @@
 	<footer class="container">
-		<p>&copy; Loco Software 2013</p>
+		<p>&copy; <cfoutput>#application.system_name#</cfoutput></p>
 	</footer>
 
 	<div id="alert_container">
