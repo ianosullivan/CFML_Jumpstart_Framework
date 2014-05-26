@@ -13,3 +13,7 @@
 
 <!--- Used in error email --->
 <cfset application.system_name = "Your System name here">
+
+<!--- Used to prevent caching. Tag this onto the end of resources as a URL parameter (js, images, css to avoid caching) 
+	example <script src="js/example.js?#application.version#">  --->
+<cfset application.version = "2.0">
