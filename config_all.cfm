@@ -11,7 +11,7 @@
 <!--- Send Error email to --->
 <cfset application.tech_support_email_list = "ian.osullivan@example.com">
 
-<!--- Used in error email --->
+<!--- Used in email --->
 <cfset application.system_name = "Your System name here">
 
 <!--- Used to prevent caching. Tag this onto the end of resources as a URL parameter (js, images, css to avoid caching) 
