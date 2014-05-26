@@ -58,9 +58,6 @@ $(function(){
 	});
 });
 
-/* ********************************************************************************* **/
-/* 								Added by Ian // Start 								 **/
-/* ********************************************************************************* **/
 var alert_timeout; //Store the setTimeout function call so we can clear it if we need to. This is needed if Alert() is called quickly in succession.
 
 //Slide Down alert panel
