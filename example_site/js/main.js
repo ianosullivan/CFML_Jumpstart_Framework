@@ -20,7 +20,7 @@ $(function(){
 		
 		AlertLoading('Loading');		
 		
-		$.post('login/act_checkUser.cfm?nolayout&' + $('#frmLogin').serialize())
+		$.post('login/act_checkUser.cfm?' + $('#frmLogin').serialize())
 		.success(function(data) {
 			//console.log(JSON.parse(data)); 
 			//console.log(JSON.parse(data).response);
