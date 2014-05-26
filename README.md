@@ -15,7 +15,7 @@
 
 ##Javascript stuff
 
-* For AJAX calls just add **?nolayout** (or /nolayout/true) if you prefer
+* For AJAX call the layout files (header.cfm & footer.cfm) are not returned because ?nolayout=true is passed along with all AJAX requests. This is done via $.ajaxSetup in main.js 
 * Has a function called **Alert('add your HTML here')** which is useful to unobtrusively notify users of soemthing - Works well with font awesome e.g. Alert('<i class="fa fa-thumbs-up"></i> dark thumbs up!!');
 * Also has an AlertLoading('your HTML here') which nicely blocks out the viewport with a message. Use AlertHide() to close it
 * Alert() function automatically called if URL has a hash value. Note this is how logout works.
