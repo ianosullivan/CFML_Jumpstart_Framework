@@ -18,12 +18,6 @@
 	<base href="#request.site_URL#"/>
 		
 	<link rel="stylesheet" href="css/bootstrap.min.css?#application.version#">
-	<style>
-		body {
-			padding-top: 50px;
-			padding-bottom: 20px;
-		}
-	</style>
 	<link rel="stylesheet" href="css/bootstrap-theme.min.css?#application.version#">
 	<link rel="stylesheet" href="css/main.css?#application.version#">
 	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.min.css?#application.version#">
