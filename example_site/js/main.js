@@ -1,12 +1,5 @@
 $(function(){
 	
-	// We don't want to include the header.cfm and footer.cfm files in AJAX requests so globally add this param to all AJAX requests
-	$.ajaxSetup({
-	    data: {
-	        nolayout: true
-	    }
-	});
-	
 	//Check for window hash message
 	if(window.location.hash != ''){
 		//Extract and decode the message
