@@ -184,7 +184,7 @@
 		</cfif>
 
 		<!--- If reload is called or application is in full reload mode then run onApplicationStart to reload all singletons --->
-        	<cfif (structKeyExists(url, "APPReload"))>
+        	<cfif structKeyExists(url, "APPReload")>
 	            <!--- Create an exclusive lock to make this call thread safe --->
 	            <cflock name="reloadApp" timeout="60" type="exclusive">
 	
