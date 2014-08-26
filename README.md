@@ -8,14 +8,14 @@
 * ORM is enabled and files are located in application/ORM
 * Functioning Login & Logout buttons
 * Uses bootstrap 3.0 and FontAwesome 4.0.1, Responsive Design.
-* **IMPORTANT**:: Any changes to CFCs or ORM requires a reload. Do this by passing *?AppReload=loco* into the URL. Note: System also supports key/value URL pairs e.g. index.cfm/AppReload/loco
+* **IMPORTANT**:: Any changes to CFCs or ORM requires a reload. Do this by passing *?AppReload* into the URL. Note: System also supports key/value URL pairs e.g. index.cfm/AppReload
 
 
 
 
 ##Javascript stuff
 
-* For AJAX calls just add ?nolayout=true (or /nolayout/true) to the URL
+* For AJAX calls just add ?nolayout (or /nolayout) to the URL
 * Has a function called **Alert('add your HTML here')** which is useful to unobtrusively notify users of soemthing - Works well with font awesome e.g. Alert('<i class="fa fa-thumbs-up"></i> dark thumbs up!!');
 * Also has an AlertLoading('your HTML here') which nicely blocks out the viewport with a message. Use AlertHide() to close it
 * Alert() function automatically called if URL has a hash value. Note this is how logout works.
