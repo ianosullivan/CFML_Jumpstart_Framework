@@ -184,14 +184,15 @@
 		</cfif>
 
 		<!--- If reload is called or application is in full reload mode then run onApplicationStart to reload all singletons --->
-        <cfif (structKeyExists(url, "APPReload") and url.APPReload EQ "loco")>
-            <!--- Create an exclusive lock to make this call thread safe --->
-            <cflock name="reloadApp" timeout="60" type="exclusive">
-
-                <!--- Reload the app --->
-                <cfset onApplicationStart() />
-				<cfset ORMReload()>
-            </cflock>
+        	<cfif (structKeyExists(url, "APPReload"))>
+	            <!--- Create an exclusive lock to make this call thread safe --->
+	            <cflock name="reloadApp" timeout="60" type="exclusive">
+	
+	                <!--- Reload the app --->
+	                <cfset onApplicationStart() />
+			<cfset ORMReload()>
+	            </cflock>
+			
 			<!--- Inform the Admin --->
 			<cfset session.message = '<i class="fa fa-thumbs-up"></i> App Reloaded. CFCs and ORM reloaded successfully!'>
 		</cfif>
@@ -215,7 +216,7 @@
 	</cffunction>
 
 
-	<!--- Call this by passing 'APPReload=loco' into the URL --->
+	<!--- Call this by passing 'APPReload' into the URL --->
 	<cffunction name="onApplicationStart" output="false">
 		<!--- Clear the application scope to ensure it is cleared out --->
 		<cfset StructClear(application)>
