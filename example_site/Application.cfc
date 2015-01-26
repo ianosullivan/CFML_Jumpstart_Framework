@@ -206,6 +206,23 @@
 	</cffunction>
 
 
+	<!--- Only reason this is here is to create a global variable for CFC calls --->
+	<cffunction name="OnRequest" access="public" returntype="void" output="true" hint="Fires after pre page processing is complete.">
+        <!--- Define arguments. --->
+        <cfargument name="TargetPage" type="string" required="true"/>
+
+		<!--- Set global '$' variable to access components --->
+		<cfset $ = application.cfcs>
+
+        <!--- Include the requested page. --->
+        <cfinclude template="#ARGUMENTS.TargetPage#" />
+
+        <!--- Return out. --->
+        <cfreturn />
+    </cffunction>
+
+
+
 	<cffunction name="OnRequestEnd" returntype="boolean" output="true">
 
 		<cfif NOT IsDefined("nolayout")>
