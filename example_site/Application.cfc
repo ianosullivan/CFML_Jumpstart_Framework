@@ -240,8 +240,8 @@
 		<!--- Include general config settings --->
 		<cfinclude template="../config_all.cfm">
 
-		<cfobject component="application.cfc.error" name="application.cfcs.error">
-		<cfobject component="application.cfc.utilities" name="application.cfcs.utilities">
+		<!--- Dynamically create components --->
+		<cfset CreateComponents()>
 
 		<!--- IMPORTANT : IMPORTANT : IMPORTANT : IMPORTANT : IMPORTANT : IMPORTANT : IMPORTANT : IMPORTANT : IMPORTANT
 			*** The below is used along with the CFC mappings variable if the components are ABOVE the webroot
@@ -295,5 +295,20 @@
 
 		</cfif>
 	</cffunction>
+
+
+	<cffunction name="CreateComponents" hint="Create ColdFusion components by looping through the directory">
+
+		<cfdirectory directory="#ExpandPath('application/cfcs')#" name="cfc_list">
+
+		<cfloop query="cfc_list">
+			<cfif cfc_list.type EQ "file">
+				<cfset cfc_name = Mid( name, 1, len(name)-4 )>
+				<cfobject component="application.cfcs.#cfc_name#" name="application.cfcs.#cfc_name#">
+			</cfif>
+		</cfloop>
+
+	</cffunction>
+
 
 </cfcomponent>
