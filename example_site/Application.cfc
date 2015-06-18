@@ -299,7 +299,8 @@
 
 	<cffunction name="CreateComponents" hint="Create ColdFusion components by looping through the directory">
 
-		<cfdirectory directory="#ExpandPath('application/cfcs')#" name="cfc_list">
+		<cfset cfcs_path = REQUEST.site_root & "application\cfcs">
+		<cfdirectory directory="#cfcs_path#" name="cfc_list">
 
 		<cfloop query="cfc_list">
 			<cfif cfc_list.type EQ "file">
