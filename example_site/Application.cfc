@@ -211,8 +211,16 @@
         <!--- Define arguments. --->
         <cfargument name="TargetPage" type="string" required="true"/>
 
-		<!--- Set global '$' variable to access components --->
+	<!--- Set global '$' variable to access components --->
+	<cfif IsDefined("application.cfcs")>
 		<cfset $ = application.cfcs>
+
+	<cfelse>
+		<!--- Might need to restart/reload the application and then reset --->
+		<cfset onApplicationStart() />
+		<cfset $ = application.cfcs>
+	</cfif>
+
 
         <!--- Include the requested page. --->
         <cfinclude template="#ARGUMENTS.TargetPage#" />
@@ -299,7 +307,7 @@
 
 	<cffunction name="CreateComponents" hint="Create ColdFusion components by looping through the directory">
 
-		<cfset cfcs_path = REQUEST.site_root & "application\cfcs">
+		<cfset cfcs_path = getDirectoryFromPath(getCurrentTemplatePath()) & "application\cfcs">
 		<cfdirectory directory="#cfcs_path#" name="cfc_list">
 
 		<cfloop query="cfc_list">
