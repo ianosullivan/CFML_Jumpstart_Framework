@@ -183,6 +183,21 @@
 			<cflocation url=".##You are now logged out of the system." addtoken="false"/>
 		</cfif>
 
+
+		<!--- If reload is called or application is in full reload mode then run onApplicationStart to reload all singletons --->
+        	<cfif structKeyExists(url, "APPReload")>
+	            <!--- Create an exclusive lock to make this call thread safe --->
+	            <cflock name="reloadApp" timeout="60" type="exclusive">
+	
+	                <!--- Reload the app --->
+	                <cfset onApplicationStart() />
+			<cfset ORMReload()>
+	            </cflock>
+			
+			<!--- Inform the Admin --->
+			<cfset session.message = '<i class="fa fa-thumbs-up"></i> App Reloaded. CFCs and ORM reloaded successfully!'>
+		</cfif>
+
 		<!--- Assume we are not processing a bypass file --->
 		<cfset bypass_file = false>
 		<!--- Check bypass files and folders list --->
@@ -198,19 +213,6 @@
 			<cflocation url="#REQUEST.site_URL###Please%20Login" addtoken="false"/>
 		</cfif>
 
-		<!--- If reload is called or application is in full reload mode then run onApplicationStart to reload all singletons --->
-        	<cfif structKeyExists(url, "APPReload")>
-	            <!--- Create an exclusive lock to make this call thread safe --->
-	            <cflock name="reloadApp" timeout="60" type="exclusive">
-	
-	                <!--- Reload the app --->
-	                <cfset onApplicationStart() />
-			<cfset ORMReload()>
-	            </cflock>
-			
-			<!--- Inform the Admin --->
-			<cfset session.message = '<i class="fa fa-thumbs-up"></i> App Reloaded. CFCs and ORM reloaded successfully!'>
-		</cfif>
 
 		<cfif NOT IsDefined("nolayout")>
 			<!--- Full Header --->
