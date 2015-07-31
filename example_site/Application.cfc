@@ -183,15 +183,21 @@
 			<cflocation url=".##You are now logged out of the system." addtoken="false"/>
 		</cfif>
 
-		<!--- If not session.logged_in send user to login page.
-		VERY IMPORTANT :: THE List and folder check below allows the listed files direct access without being fully logged in. So it bypasses the logged in security check
-		This would be important for API calls etc
-		--->
-		<!--- <cfif !session.logged_in AND !ListContains(application.security_bypass_files_list, GetFileFromPath(CGI.CF_TEMPLATE_PATH))> --->
-		<cfif !session.logged_in AND !ListContains(application.security_bypass_files_list, GetFileFromPath(CGI.CF_TEMPLATE_PATH)) AND !FindNoCase("\testing\", CGI.CF_TEMPLATE_PATH) >
-			<!--- Go to login page --->
-			<cflocation url="#REQUEST.site_URL#index.html" addtoken="false"/>
+		<!--- Assume we are not processing a bypass file --->
+		<cfset bypass_file = false>
+		<!--- Check bypass files and folders list --->
+		<cfif ListContains(application.security_bypass.files, GetFileFromPath(CGI.CF_TEMPLATE_PATH)) OR ListContains(application.security_bypass.folders, CGI.CF_TEMPLATE_PATH) >
+			<cfset bypass_file = true>
+			<!--- Suppress the layout as we typically don't want it for any of the bypass files as they are either Test/JSON/REST files --->
+			<cfset nolayout = true>
 		</cfif>
+
+		<!--- If not logged_in and not a bypass-file send user back to login page --->
+		<cfif !session.logged_in AND !bypass_file>
+			<!--- Go to login page --->
+			<cflocation url="#REQUEST.site_URL###Please%20Login" addtoken="false"/>
+		</cfif>
+
 		<!--- If reload is called or application is in full reload mode then run onApplicationStart to reload all singletons --->
         	<cfif structKeyExists(url, "APPReload")>
 	            <!--- Create an exclusive lock to make this call thread safe --->
