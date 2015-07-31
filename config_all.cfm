@@ -14,12 +14,11 @@
 <!--- Used in email --->
 <cfset application.system_name = "Your System name here">
 
-<!--- List the files that are allowed to bypass the security system meaning a user does not need to be logged in to access these
-file. All other CF file access would require a user to be logged in.
-This var is used in Application.cfc - onRequestStart()
-Note these files can be anything you like. I've just listed some typical files I have... 
+<!--- List the files and folders that are allowed to bypass the security system...
+	This var is used in Application.cfc - onRequestStart()
 --->
-<cfset application.security_bypass_files_list = "_test.cfm, act_checkUser.cfm, act_sendPassword.cfm, _ORM_code.cfm, json.cfm, map_data.cfm, json_data.cfm">
+<cfset application.security_bypass.files = "_test.cfm, act_checkUser.cfm, act_registerUser.cfm, act_sendPassword.cfm, _ORM_code.cfm, activate.cfm, save_payment.cfm">
+<cfset application.security_bypass.folders = "testing, rest">
 
 <!--- Used to prevent caching. Tag this onto the end of resources as a URL parameter (js, images, css to avoid caching) 
 	example <script src="js/example.js?#application.version#">  --->
