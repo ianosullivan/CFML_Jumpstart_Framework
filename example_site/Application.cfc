@@ -201,7 +201,7 @@
 		<!--- Assume we are not processing a bypass file --->
 		<cfset bypass_file = false>
 		<!--- Check bypass files and folders list --->
-		<cfif ListContains(application.security_bypass.files, GetFileFromPath(CGI.CF_TEMPLATE_PATH)) OR ListContains(application.security_bypass.folders, CGI.CF_TEMPLATE_PATH) >
+		<cfif ListContains(application.security_bypass.files, GetFileFromPath(CGI.CF_TEMPLATE_PATH)) OR ListContains(application.security_bypass.folders, ListLast( GetDirectoryFromPath(CGI.CF_TEMPLATE_PATH), '\,/') ) >
 			<cfset bypass_file = true>
 			<!--- Suppress the layout as we typically don't want it for any of the bypass files as they are either Test/JSON/REST files --->
 			<cfset nolayout = true>
