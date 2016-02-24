@@ -151,6 +151,37 @@
 		</cfloop>
 		<!--- URL key/value pair check // END --->
 
+		<!--- URL key/value pair check 2
+			Example - http://app.locosoftware.ie/eveara_sul/testing/?/first_param/123/second_param/456.
+			Note that there is no index.cfm file in the URL so it works directly on the folder --->
+		<cfif ListLen(CGI.query_string, '/') GT 1>
+			<cfset key_value_list = CGI.query_string>
+
+			<cfset key_value_list_len = ListLen(key_value_list, '/')>
+
+			<cfif key_value_list_len GT 1>
+				<!--- <cfset URL = StructNew()> --->
+				<cfset StructClear(URL)>
+			</cfif>
+
+			<cfset pair_iterator = 1>
+
+			<cfloop condition="pair_iterator LTE #key_value_list_len#">
+				<cfoutput>
+					<cfif pair_iterator LT key_value_list_len>
+						<cfset "URL.#ListGetAt(key_value_list, pair_iterator, '/')#" = "#ListGetAt(key_value_list, pair_iterator+1, '/')#">
+					<cfelse>
+						<cfset "URL.#ListGetAt(key_value_list, pair_iterator, '/')#" = "">
+					</cfif>
+				</cfoutput>
+
+				<cfset pair_iterator += 2>
+			</cfloop>
+			<!--- URL key/value pair check // END --->
+
+		</cfif>
+		<!--- URL key/value pair check 2 // END --->
+
 
 		<!--- Page reload message // Used in footer.cfm --->
 		<cfparam name="session.message" default="">
