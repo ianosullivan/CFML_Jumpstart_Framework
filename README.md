@@ -11,7 +11,7 @@
 * Functioning Login & Logout buttons
 * Uses bootstrap 3.0 and FontAwesome 4.0.1, Responsive Design.
 * **IMPORTANT**:: Any changes to CFCs or ORM requires an application reload - firing the onApplicationStart() function. Do this by passing *?AppReload* into the URL. 
-* Note: System also supports key/value URL pairs e.g. index.cfm/nolayout/true, index.cfm/appreload
+* Note: Framework also supports SEO friendly key/value URL pairs e.g. www.example.com/index.cfm/first_param/123/second_param/456, www.example.com/?/first_param/123/second_param/456
 
 
 
