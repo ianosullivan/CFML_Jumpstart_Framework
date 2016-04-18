@@ -347,7 +347,11 @@
 				</cfoutput>
 			</cfif>
 
-			<cfset application.cfcs.error.SendMail(Arguments.Exception)>
+			<!--- Send error if possible --->
+			<cfif IsDefined("application.cfcs.error")>
+				<cfset application.cfcs.error.SendMail(Arguments.Exception)>
+			</cfif>
+
 
 		</cfif>
 	</cffunction>
