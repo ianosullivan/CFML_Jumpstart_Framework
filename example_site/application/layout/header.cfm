@@ -15,7 +15,7 @@
 		This ensures that any subfolders have the correct locations to assets
 	--->
 	<cfoutput>
-	<base href="#request.site_URL#"/>
+	<base href="#APPLICATION.settings.site_URL#"/>
 		
 	<link rel="stylesheet" href="css/bootstrap.min.css?#application.version#">
 	<link rel="stylesheet" href="css/bootstrap-theme.min.css?#application.version#">
