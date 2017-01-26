@@ -40,89 +40,6 @@
 			hint="I am the template requested by the user."
 			/>
 
-		<!--- Define the local scope. --->
-		<cfset local = {} />
-
-		<!--- Define request settings. --->
-		<cfsetting showdebugoutput="false" />
-
-		<!---
-			Set the value of the web root. Since we know that this
-			template (Application.cfc) is in the web root for this
-			application, all we have to do is figure out the
-			difference between this template and the requested
-			template. Every directory difference will require our
-			webroot to have a "../" in it.
-		--->
-
-		<!---
-			Get the current (Application.cfc) directory path based
-			on the current template path.
-		--->
-		<cfset local.basePath = getDirectoryFromPath(
-			getCurrentTemplatePath()
-			) />
-
-		<!---
-			Get the target (script_name) directory path based on
-			expanded script name.
-		--->
-		<cfset local.targetPath = getDirectoryFromPath(
-			expandPath( arguments.template )
-			) />
-
-		<!---
-			Now that we have both paths, all we have to do is
-			find the difference in path. We can treat the paths
-			as slash-delimmited lists. To do this, let's calculate
-			the depth of sub directories.
-		--->
-		<cfset local.requestDepth = (
-			listLen( local.targetPath, "\/" ) -
-			listLen( local.basePath, "\/" )
-			) />
-
-		<!---
-			With the request depth, we can easily create our
-			web root by repeating "../" the appropriate number
-			of times.
-		--->
-		<cfset request.webRoot = repeatString(
-			"../",
-			local.requestDepth
-			) />
-
-		<!---
-			While we wouldn't normally do this for every page
-			request (it would normally be cached in the
-			application initialization), I'm going to calculate
-			the site URL based on the web root.
-		--->
-		<!---<cfset request.site_URL = (
-			"http://" &
-			cgi.server_name &
-			reReplace(
-				getDirectoryFromPath( arguments.template ),
-				"([^\\/]+[\\/]){#local.requestDepth#}$",
-				"",
-				"one"
-				)
-			) />--->
-		<!---
-			Changed by Ian O'Sullivan so that it will work for localhost development environment also.
-			replaced cgi.server_name with cgi.http_host as it picks up the port also.
-		--->
-		<cfset request.site_URL = (
-			iIf( cgi.HTTPS IS "on", de("https://"), de("http://") ) &
-			cgi.http_host &
-			reReplace(
-				getDirectoryFromPath( arguments.template ),
-				"([^\\/]+[\\/]){#local.requestDepth#}$",
-				"",
-				"one"
-				)
-			) />
-
 		<!---
 			URL key/value pair check // START
 		 Check to see if we have some key/value pairs (in the format www.example.com/page.cfm/var1/foo/var2/bar) and put them into the URL struct.
@@ -187,11 +104,6 @@
 		<cfparam name="session.message" default="">
 		<cfparam name="session.logged_in" default="false"> <!--- Used through out the system --->
 		<cfparam name="session.user.firstname" default=""> <!--- Needed for line 133 below in case the session has expired. Without this the system will crash --->
-
-		<!--- The physical site root --->
-		<cfset REQUEST.site_root = GetDirectoryFromPath(GETCurrentTemplatePath())>
-		<!--- The site folder (used in error email) --->
-		<cfset REQUEST.site_folder = ListLast(REQUEST.site_root, '\')>
 
 		<!--- Check if we are trying to logout the current user => clear the current session  --->
 		<cfif structKeyExists( url, "logout" )>
@@ -295,6 +207,94 @@
 		<cfset StructClear(application)>
 		<!--- Include general config settings --->
 		<cfinclude template="../config_all.cfm">
+
+		<!--- Define the local scope. --->
+		<cfset local = {} />
+
+		<!--- Define request settings. --->
+		<cfsetting showdebugoutput="false" />
+
+		<!---
+			Set the value of the web root. Since we know that this
+			template (Application.cfc) is in the web root for this
+			application, all we have to do is figure out the
+			difference between this template and the requested
+			template. Every directory difference will require our
+			webroot to have a "../" in it.
+		--->
+
+		<!---
+			Get the current (Application.cfc) directory path based
+			on the current template path.
+		--->
+		<cfset local.basePath = getDirectoryFromPath(
+			getCurrentTemplatePath()
+			) />
+
+		<!---
+			Get the target (script_name) directory path based on
+			expanded script name.
+		--->
+		<cfset local.targetPath = getDirectoryFromPath(
+			expandPath( arguments.template )
+			) />
+
+		<!---
+			Now that we have both paths, all we have to do is
+			find the difference in path. We can treat the paths
+			as slash-delimmited lists. To do this, let's calculate
+			the depth of sub directories.
+		--->
+		<cfset local.requestDepth = (
+			listLen( local.targetPath, "\/" ) -
+			listLen( local.basePath, "\/" )
+			) />
+
+		<!---
+			With the request depth, we can easily create our
+			web root by repeating "../" the appropriate number
+			of times.
+		--->
+		<cfset APPLICATION.settings.webRoot = repeatString(
+			"../",
+			local.requestDepth
+			) />
+
+		<!---
+			While we wouldn't normally do this for every page
+			request (it would normally be cached in the
+			application initialization), I'm going to calculate
+			the site URL based on the web root.
+		--->
+		<!---<cfset APPLICATION.settings.site_URL = (
+			"http://" &
+			cgi.server_name &
+			reReplace(
+				getDirectoryFromPath( arguments.template ),
+				"([^\\/]+[\\/]){#local.requestDepth#}$",
+				"",
+				"one"
+				)
+			) />--->
+		<!---
+			Changed by Ian O'Sullivan so that it will work for localhost development environment also.
+			replaced cgi.server_name with cgi.http_host as it picks up the port also.
+		--->
+		<cfset APPLICATION.settings.site_URL = (
+			iIf( cgi.HTTPS IS "on", de("https://"), de("http://") ) &
+			cgi.http_host &
+			reReplace(
+				getDirectoryFromPath( arguments.template ),
+				"([^\\/]+[\\/]){#local.requestDepth#}$",
+				"",
+				"one"
+				)
+			) />
+		
+		<!--- The physical site root --->
+		<cfset APPLICATION.settings.site_root = GetDirectoryFromPath(GETCurrentTemplatePath())>
+		<!--- The site folder (used in error email) --->
+		<cfset APPLICATION.settings.site_folder = ListLast(APPLICATION.settings.site_root, '\')>
 
 		<!--- Dynamically create components --->
 		<cfset CreateComponents()>
