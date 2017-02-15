@@ -1,6 +1,6 @@
 ##General Info
 
-* System uses **base href=”#APPLICATION.settings.webRoot#”**. This is dynamically created in OnApplicationStart(). This means all sources for images, css and scripts are relative to the base path URL. This is very important as all AJAX calls are relevant to the base tag. Using the dynamic base tag means you don’t need to worry about paths when releasing code. This makes use of Ben Nadels dynamic URL code, which he has kindly given me persmission to use.
+* System uses **base href=”#APPLICATION.settings.site_URL#”**. This is dynamically created in OnApplicationStart(). This means all sources for images, css and scripts are relative to the base path URL. This is very important as all AJAX calls are relevant to the base tag. Using the dynamic base tag means you don’t need to worry about paths when releasing code. This makes use of Ben Nadels dynamic URL code, which he has kindly given me persmission to use.
 * Components are declared in the application/cfcs folder. They are dynamically initialized in OnApplicationStart() function in Appliction.cfc. This means you do not need to initialize a component before use as it is already initialized.
 * Application.cfc also has instructions on how to have external components. 
 * Additionally you can use the global '$' variable to access your components. Note: '$' is a global variable for 'application.cfcs'. *Example usage: $.user.getName() -> $.component.function*
