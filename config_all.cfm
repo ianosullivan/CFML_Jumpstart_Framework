@@ -24,4 +24,4 @@
 	example <script src="js/example.js?#application.reload_date#">.
 	Using this approach we still get the benefits of caching but we can force an update by putting '?Appreload' in the URL
 --->
-<cfset application.reload_date = dateTimeFormat(now(), 'yyyyddmm-hhnn')>
+<cfset application.reload_date = dateFormat(now(), 'yyyyddmm') & "-" & timeFormat(now(), 'hhnn')>
