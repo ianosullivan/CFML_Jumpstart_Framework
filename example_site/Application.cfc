@@ -284,7 +284,7 @@
 			replaced cgi.server_name with cgi.http_host as it picks up the port also.
 		--->
 		<cfset APPLICATION.settings.site_URL = (
-			iIf( cgi.HTTPS IS "on", de("https://"), de("http://") ) &
+			( cgi.HTTPS IS "on" ? "https://" : "http://" ) &
 			cgi.http_host &
 			reReplace(
 				getDirectoryFromPath( arguments.template ),
