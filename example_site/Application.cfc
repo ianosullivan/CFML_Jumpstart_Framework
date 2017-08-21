@@ -144,6 +144,18 @@
 			<cfset session.message = '<i class="fa fa-thumbs-up"></i> App Reloaded. CFCs and ORM reloaded successfully!'>
 		</cfif>
 
+		<!--- If serverReload is called or application is in full reload mode then run onApplicationStart to reload all singletons --->
+        	<cfif (structKeyExists(url, "serverReload"))>
+            		<!--- Create an exclusive lock to make this call thread safe --->
+            		<cflock name="reloadServer" timeout="60" type="exclusive">
+				<cfscript>
+					objServer = createObject("component", "server");
+					objServer.onServerStart();
+				</cfscript>
+            		</cflock>
+		</cfif>
+
+
 		<!--- Assume we are not processing a bypass file --->
 		<cfset bypass_file = false>
 		<!--- Check bypass files and folders list --->
