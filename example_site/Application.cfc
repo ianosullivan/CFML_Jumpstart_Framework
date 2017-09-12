@@ -165,11 +165,13 @@
 			<cfset nolayout = true>
 		</cfif>
 
-		<!--- If not logged_in and not a bypass-file send user back to login page --->
-		<cfif !session.logged_in AND !bypass_file>
+		<!--- If this is an Application (not website) and the user is not logged_in and not a bypass-file send user back to login page 
+			Careful not to case a redirect loop
+		--->
+		<!--- <cfif !session.logged_in AND !bypass_file>
 			<!--- Go to login page --->
-			<cflocation url="#REQUEST.site_URL###Please%20Login" addtoken="false"/>
-		</cfif>
+			<cflocation url="#APPLICATION.settings.site_URL###Please%20Login" addtoken="false"/>
+		</cfif> --->
 
 
 		<cfif NOT IsDefined("nolayout")>
@@ -251,7 +253,7 @@
 			expanded script name.
 		--->
 		<cfset local.targetPath = getDirectoryFromPath(
-			expandPath( arguments.template )
+			expandPath( CGI.script_name )
 			) />
 
 		<!---
@@ -275,31 +277,11 @@
 			local.requestDepth
 			) />
 
-		<!---
-			While we wouldn't normally do this for every page
-			request (it would normally be cached in the
-			application initialization), I'm going to calculate
-			the site URL based on the web root.
-		--->
-		<!---<cfset APPLICATION.settings.site_URL = (
-			"http://" &
-			cgi.server_name &
-			reReplace(
-				getDirectoryFromPath( arguments.template ),
-				"([^\\/]+[\\/]){#local.requestDepth#}$",
-				"",
-				"one"
-				)
-			) />--->
-		<!---
-			Changed by Ian O'Sullivan so that it will work for localhost development environment also.
-			replaced cgi.server_name with cgi.http_host as it picks up the port also.
-		--->
 		<cfset APPLICATION.settings.site_URL = (
 			( cgi.HTTPS IS "on" ? "https://" : "http://" ) &
 			cgi.http_host &
 			reReplace(
-				getDirectoryFromPath( arguments.template ),
+				getDirectoryFromPath( CGI.script_name ),
 				"([^\\/]+[\\/]){#local.requestDepth#}$",
 				"",
 				"one"
