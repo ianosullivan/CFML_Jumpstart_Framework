@@ -343,7 +343,20 @@
 					</div>
 				</cfoutput>
 			</cfif>
-
+			
+			<!--- JS to show error --->
+			<script type="text/javascript">
+				function ShowError() {
+					var e = document.getElementById('error_info');
+					if(e.style.display == 'block')
+						e.style.display = 'none';
+					else {
+						e.style.display = 'block';
+						//Go to the error
+						window.location.assign('#error_info');						
+					}
+				}
+			</script>
 			<!--- Send error if possible --->
 			<cfif IsDefined("application.cfcs.error")>
 				<cfset application.cfcs.error.SendMail(Arguments.Exception)>
