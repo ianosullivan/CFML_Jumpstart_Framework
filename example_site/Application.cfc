@@ -353,17 +353,20 @@
 
 	<cffunction name="CreateComponents" hint="Create ColdFusion components by looping through the directory">
 
-		<cfset cfcs_path = getDirectoryFromPath(getCurrentTemplatePath()) & "application\cfcs">
-		<cfdirectory directory="#cfcs_path#" name="cfc_list">
+		<cfset cfcs_relative_path = "application\cfcs">
+		<cfset cfcs_full_path = getDirectoryFromPath(getCurrentTemplatePath()) & cfcs_relative_path>
+		<cfdirectory directory="#cfcs_full_path#" name="cfc_list">
+
+		<cfset application.cfcs = StructNew()>
 
 		<cfloop query="cfc_list">
 			<cfif cfc_list.type EQ "file">
 				<cfset cfc_name = Mid( name, 1, len(name)-4 )>
-				<cfobject component="application.cfcs.#cfc_name#" name="application.cfcs.#cfc_name#">
+				<cfobject component="#listChangeDelims(cfcs_relative_path,'.')#.#cfc_name#" name="application.cfcs.#cfc_name#">
 			</cfif>
 		</cfloop>
-
 	</cffunction>
+
 
 
 </cfcomponent>
