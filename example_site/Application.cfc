@@ -262,7 +262,7 @@
 			) />
 
 		<cfset APPLICATION.settings.site_URL = (
-			"//" &
+			( cgi.HTTPS IS "on" ? "https://" : "http://" ) &
 			cgi.http_host &
 			reReplace(
 				getDirectoryFromPath( CGI.script_name ),
