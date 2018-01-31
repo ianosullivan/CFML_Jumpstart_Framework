@@ -353,7 +353,7 @@
 
 	<cffunction name="CreateComponents" hint="Create ColdFusion components by looping through the directory">
 
-		<cfset cfcs_relative_path = "application\cfcs">
+		<cfset cfcs_relative_path = "application/cfcs">
 		<cfset cfcs_full_path = getDirectoryFromPath(getCurrentTemplatePath()) & cfcs_relative_path>
 		<cfdirectory directory="#cfcs_full_path#" name="cfc_list">
 
