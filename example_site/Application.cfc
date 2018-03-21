@@ -64,11 +64,11 @@
 
 		<cfset key_value_list_len = ListLen(key_value_list, '/')>
 
-		<!--- Clean the URL structure in case it contains rogue stuff --->
+		<!--- Clean the URL structure in case it contains rogue stuff
 		<cfif key_value_list_len GT 1>
 			<!--- <cfset URL = StructNew()> --->
 			<cfset StructClear(URL)>
-		</cfif>
+		</cfif> --->
 
 		<cfset pair_iterator = 1>
 
