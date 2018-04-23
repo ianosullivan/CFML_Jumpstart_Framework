@@ -260,7 +260,8 @@
 			"../",
 			local.requestDepth
 			) />
-
+		
+		<!--- We use ( cgi.HTTPS IS "on" ? "https://" : "http://" ) instead of just "//" because if we use this in emails the specified protocol is required --->
 		<cfset APPLICATION.settings.site_URL = (
 			( cgi.HTTPS IS "on" ? "https://" : "http://" ) &
 			cgi.http_host &
