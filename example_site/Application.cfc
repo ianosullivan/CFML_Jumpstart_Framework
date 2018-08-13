@@ -361,11 +361,24 @@
 		<cfset application.cfcs = StructNew()>
 
 		<cfloop query="cfc_list">
+			<!--- Skip folders --->
 			<cfif cfc_list.type EQ "file">
-				<cfset cfc_name = Mid( name, 1, len(name)-4 )>
-				<cfobject component="#listChangeDelims(cfcs_relative_path,'.')#.#cfc_name#" name="application.cfcs.#cfc_name#">
+				<cfset file_extension = right(cfc_list.name, 4)>
+			
+				<!--- Only create components for '.cfc' files --->
+				<cfif file_extension EQ ".cfc">
+					<cfset cfc_name = Mid( name, 1, len(name)-4 )>
+					
+					<cftry>
+						<cfobject component="components.#cfc_name#" name="application.crm.#cfc_name#">
+						<cfcatch type="any">
+							<!--- Note: Exception will be caused for any file that has any rogue characters ( spaces, dashes, symbols etc ) that would not be allowed in a typical CF variable name --->
+						</cfcatch>
+					</cftry>
+				</cfif>
 			</cfif>
 		</cfloop>
+
 	</cffunction>
 
 
