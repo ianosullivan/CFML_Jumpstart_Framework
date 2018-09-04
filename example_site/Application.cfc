@@ -353,9 +353,11 @@
 
 
 	<cffunction name="CreateComponents" hint="Create ColdFusion components by looping through the directory">
-
 		<cfset cfcs_relative_path = "application/cfcs">
+
+		<cfset componenet_path = listChangeDelims(cfcs_relative_path,'.','/\')> <!--- The path for the <cfobject> below needs dots not slashes --->
 		<cfset cfcs_full_path = getDirectoryFromPath(getCurrentTemplatePath()) & cfcs_relative_path>
+		
 		<cfdirectory directory="#cfcs_full_path#" name="cfc_list">
 
 		<cfset application.cfcs = StructNew()>
@@ -367,18 +369,15 @@
 			
 				<!--- Only create components for '.cfc' files --->
 				<cfif file_extension EQ ".cfc">
-					<cfset cfc_name = Mid( name, 1, len(name)-4 )>
-					
-					<cftry>
-						<cfobject component="components.#cfc_name#" name="application.crm.#cfc_name#">
-						<cfcatch type="any">
-							<!--- Note: Exception will be caused for any file that has any rogue characters ( spaces, dashes, symbols etc ) that would not be allowed in a typical CF variable name --->
-						</cfcatch>
-					</cftry>
+					<cfset cfc_name = mid( name, 1, len(name)-4 )>
+
+					<!--- If you find any rogue characters in the component name skip it. Only aplha, number and underscores allowed --->
+					<cfif !reFind('[^A-Za-z0-9_]',cfc_name)>
+						<cfobject component="#componenet_path#.#cfc_name#" name="#componenet_path#.#cfc_name#">
+					</cfif>
 				</cfif>
 			</cfif>
 		</cfloop>
-
 	</cffunction>
 
 
