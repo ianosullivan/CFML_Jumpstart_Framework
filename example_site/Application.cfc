@@ -121,7 +121,6 @@
 	
 	                <!--- Reload the app --->
 	                <cfset onApplicationStart() />
-			<cfset ORMReload()>
 	            </cflock>
 			
 			<!--- Inform the Admin --->
@@ -204,6 +203,8 @@
 
 	<!--- Call this by passing 'APPReload' into the URL --->
 	<cffunction name="onApplicationStart" output="false">
+		<cfset ORMReload()>
+		
 		<!--- Clear the application scope to ensure it is cleared out --->
 		<cfset StructClear(application)>
 		<!--- Include general config settings --->
