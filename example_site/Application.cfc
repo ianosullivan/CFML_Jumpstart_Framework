@@ -12,7 +12,7 @@
 	CGI.HTTP_HOST is added to ensure that site with/without 'www' at the front are also unique; 
 	Example www.domain.com is different to domain.com
 	--->
-	<cfset THIS.name = hash( getCurrentTemplatePath() & CGI.HTTP_HOST ) />
+	<cfset THIS.name = hash( getCurrentTemplatePath() & CGI.HTTP_HOST & cgi.HTTPS) />
 	<!--- IMPORTANT : IMPORTANT : IMPORTANT : IMPORTANT : IMPORTANT : IMPORTANT : IMPORTANT : IMPORTANT : IMPORTANT
 		*** If your components are in another folder ABOVE the webroot you need to create a mapping like this.
 		*** See the comments in the OnApplicationStart function below
