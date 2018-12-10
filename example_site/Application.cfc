@@ -11,7 +11,7 @@
 	
 	CGI.HTTP_HOST and cgi.https are added to ensure that site with/without 'www' at the front are also unique; 
 	Example www.domain.com is different to domain.com and http://www.domain is different to https://www.domain.com
-	This is most significant as it affects the global >base> tag
+	This is most significant as it affects the global <base href=""> tag
 	--->
 	<cfset THIS.name = hash( getCurrentTemplatePath() & CGI.HTTP_HOST & cgi.HTTPS) />
 	<!--- IMPORTANT : IMPORTANT : IMPORTANT : IMPORTANT : IMPORTANT : IMPORTANT : IMPORTANT : IMPORTANT : IMPORTANT
