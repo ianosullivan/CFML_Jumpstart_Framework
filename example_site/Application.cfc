@@ -15,7 +15,7 @@
 	
 	(Side Note: Don't use dashes in the name below. It results in an ERR_INCOMPLETE_CHUNKED_ENCODING error on my CF 2018 Dev environment)
 	--->
-	<cfset THIS.name = "[website-name-goes-here] " & hash( getCurrentTemplatePath() & CGI.HTTP_HOST & cgi.HTTPS) />
+	<cfset THIS.name = "Website Name " & hash( getCurrentTemplatePath() & CGI.HTTP_HOST & cgi.HTTPS) />
 	
 	<!--- IMPORTANT : IMPORTANT : IMPORTANT : IMPORTANT : IMPORTANT : IMPORTANT : IMPORTANT : IMPORTANT : IMPORTANT
 		*** If your components are in another folder ABOVE the webroot you need to create a mapping like this.
