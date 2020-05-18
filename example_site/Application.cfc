@@ -12,8 +12,11 @@
 	CGI.HTTP_HOST and cgi.https are added to ensure that site with/without 'www' at the front are also unique; 
 	Example www.domain.com is different to domain.com and http://www.domain is different to https://www.domain.com
 	This is significant as it affects the global <base href=""> tag
+	
+	(Side Note: Don't use dashes in the name below. It results in an ERR_INCOMPLETE_CHUNKED_ENCODING error on my CF 2018 Dev environment)
 	--->
-	<cfset THIS.name = "[website-name-goes-here] - " & hash( getCurrentTemplatePath() & CGI.HTTP_HOST & cgi.HTTPS) />
+	<cfset THIS.name = "[website-name-goes-here] " & hash( getCurrentTemplatePath() & CGI.HTTP_HOST & cgi.HTTPS) />
+	
 	<!--- IMPORTANT : IMPORTANT : IMPORTANT : IMPORTANT : IMPORTANT : IMPORTANT : IMPORTANT : IMPORTANT : IMPORTANT
 		*** If your components are in another folder ABOVE the webroot you need to create a mapping like this.
 		*** See the comments in the OnApplicationStart function below
