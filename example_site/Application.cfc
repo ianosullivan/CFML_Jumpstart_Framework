@@ -11,7 +11,8 @@
 	
 	CGI.HTTP_HOST and cgi.https are added to ensure that site with/without 'www' at the front are also unique; 
 	Example www.domain.com is different to domain.com and http://www.domain is different to https://www.domain.com
-	This is significant as it affects the global <base href=""> tag
+	This is significant as it affects the global <base href=""> tag which is needed for all relative resources.
+	Also, the reason why I didn’t use CGI variables is because they did not give me the correct root folder when the application folder was a subfolder within a sub domain.
 	
 	(Side Note: Don't use dashes in the name below. It results in an ERR_INCOMPLETE_CHUNKED_ENCODING error on my CF 2018 Dev environment)
 	--->
